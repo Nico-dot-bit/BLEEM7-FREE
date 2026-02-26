@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultimate Elite Panel - Manual Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif;}
+
+body{
+height:100vh;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+display:flex;
+justify-content:center;
+align-items:center;
+overflow: hidden;
+}
+
+/* LOGIN */
+.login-box{
+width:320px;
+padding:30px;
+background:rgba(0,0,0,0.9);
+border-radius:20px;
+box-shadow:0 0 30px #00f2ff;
+text-align:center;
+}
+
+.login-box h2{color:#00f2ff;margin-bottom:20px;}
+.input-box{margin:15px 0;}
+.input-box input{
+width:100%;
+padding:10px;
+border:none;
+border-radius:10px;
+background:#111;
+color:#00f2ff;
+border:1px solid #00f2ff;
+outline: none;
+}
+
+button{
+margin-top:15px;
+padding:10px 20px;
+border:none;
+border-radius:20px;
+background:#00f2ff;
+color:#000;
+cursor:pointer;
+font-weight:bold;
+}
+
+#error{color:red;margin-top:10px; font-size: 12px;}
+
+/* PANEL */
+.menu{
+display:none;
+width:420px;
+max-height:85vh;
+overflow-y:auto;
+padding:25px;
+background:rgba(0,0,0,0.95);
+border-radius:20px;
+box-shadow:0 0 40px #00f2ff;
+}
+
+.menu h2{
+color:#00f2ff;
+text-align:center;
+margin-bottom:20px;
+font-size: 20px;
+text-shadow: 0 0 10px #00f2ff;
+}
+
+/* CUADRADOS */
+.top-squares{
+display:flex;
+justify-content:center;
+gap:15px;
+margin-bottom:20px;
+}
+
+.square-btn{
+width:50px;
+height:50px;
+background:#111;
+border:2px solid #00f2ff;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:24px;
+color:#00f2ff;
+cursor:pointer;
+box-shadow:0 0 10px #00f2ff;
+transition:0.3s;
+}
+
+.square-btn.active-tab {
+    background: #00f2ff;
+    color: #000;
+}
+
+/* SECCIONES */
+.section{display:none;}
+.section.active{display:block;}
+
+.option{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px;
+margin:8px 0;
+background:rgba(255, 255, 255, 0.05);
+border-radius:10px;
+border: 1px solid rgba(0, 242, 255, 0.3);
+color:#00f2ff;
+font-size:12px;
+}
+
+/* BOTÓN ACTIVAR DENTRO DEL MENÚ AJUSTES */
+.btn-main-activar {
+    width: 100%;
+    padding: 20px;
+    background: transparent;
+    border: 2px solid #ff3366;
+    color: #ff3366;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-top: 10px;
+    text-transform: uppercase;
+    transition: 0.4s;
+    box-shadow: 0 0 10px rgba(255, 51, 102, 0.2);
+}
+
+.btn-main-activar.running {
+    background: #00f2ff;
+    color: #000;
+    border-color: #00f2ff;
+    box-shadow: 0 0 30px #00f2ff;
+}
+
+/* SWITCH */
+.switch{position:relative;width:40px;height:20px;}
+.switch input{display:none;}
+.slider{
+position:absolute;top:0;left:0;right:0;bottom:0;
+background:#333;border-radius:30px;transition:0.3s;cursor:pointer;
+}
+.slider:before{
+content:"";position:absolute;height:14px;width:14px;
+left:3px;bottom:3px;background:#00f2ff;border-radius:50%;transition:0.3s;
+}
+input:checked + .slider{background:#00f2ff;}
+input:checked + .slider:before{transform:translateX(20px);background:#000;}
+
+#status-log {
+    color: #ffcc00;
+    text-align: center;
+    font-size: 11px;
+    margin-top: 15px;
+    height: 20px;
+}
+</style>
+</head>
+<body>
+
+<div class="login-box" id="login">
+    <h2>SECURE LOGIN</h2>
+    <div class="input-box">
+        <input type="text" id="username" placeholder="Usuario">
+    </div>
+    <div class="input-box">
+        <input type="password" id="password" placeholder="Key">
+    </div>
+    <button onclick="enterMenu()">ENTRAR</button>
+    <div id="error"></div>
+</div>
+
+<div class="menu" id="menu">
+    <h2>ULTIMATE PANEL</h2>
+
+    <div class="top-squares">
+        <div class="square-btn" id="t1" onclick="showSection(1)">⚡</div>
+        <div class="square-btn" id="t2" onclick="showSection(2)">🔥</div>
+        <div class="square-btn" id="t3" onclick="showSection(3)">🎯</div>
+        <div class="square-btn" id="t4" onclick="showSection(4)">⚙️</div>
+    </div>
+
+    <div class="section active" id="section1">
+        <div class="option">AIMBOT V2 <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+        <div class="option">AUTO HEADSHOT <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+    </div>
+
+    <div class="section" id="section2">
+        <div class="option">FPS UNLOCK <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+        <div class="option">ANTI-LAG <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+    </div>
+
+    <div class="section" id="section3">
+        <div class="option">SENSITIVITY X2 <label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+    </div>
+
+    <div class="section" id="section4">
+        <div class="option">CALIBRE ESTABLE <label class="switch"><input type="checkbox" id="masterCheck"><span class="slider"></span></label></div>
+        <button class="btn-main-activar" id="mainActivar" onclick="ejecutarTodo()">ACTIVAR</button>
+        <div id="status-log"></div>
+    </div>
+</div>
+
+<script>
+function enterMenu(){
+    // Obtener valores escritos por el usuario
+    const user = document.getElementById("username").value;
+    const pass = document.getElementById("password").value;
+    
+    // Verificación manual
+    if(user === "BLEEM7" && pass === "FREE"){
+        document.getElementById("login").style.display = "none";
+        document.getElementById("menu").style.display = "block";
+        showSection(1);
+    } else {
+        document.getElementById("error").innerText = "Usuario o Key incorrectos";
+    }
+}
+
+function showSection(num){
+    document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
+    document.querySelectorAll(".square-btn").forEach(btn => btn.classList.remove("active-tab"));
+    document.getElementById("section"+num).classList.add("active");
+    document.getElementById("t"+num).classList.add("active-tab");
+}
+
+function ejecutarTodo() {
+    const btn = document.getElementById('mainActivar');
+    const log = document.getElementById('status-log');
+    const check = document.getElementById('masterCheck');
+
+    btn.innerText = "PROCESANDO...";
+    btn.classList.add('running');
+    if(check) check.checked = true;
+
+    setTimeout(() => {
+        log.innerText = "CALIBRANDO SISTEMA...";
+        setTimeout(() => {
+            log.innerText = "ABRIENDO FREE FIRE...";
+            window.location.href = "intent:#Intent;package=com.dts.freefireth;end";
+        }, 1200);
+    }, 1000);
+}
+</script>
+
+</body>
+</html>
